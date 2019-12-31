@@ -1,6 +1,8 @@
 machine:
   services:
     - docker
+  java:
+    version: oraclejdk11
 
 dependencies:
   override:
