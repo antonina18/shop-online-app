@@ -1,8 +1,10 @@
+language: java
+jdk:
+  -oraclejdk11
+
 machine:
   services:
     - docker
-  java:
-    version: oraclejdk11
 
 dependencies:
   override:
