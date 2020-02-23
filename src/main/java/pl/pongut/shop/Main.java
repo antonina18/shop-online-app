@@ -11,5 +11,4 @@ public class Main {
         SpringApplication app = new SpringApplication(Main.class);
         app.run(args);
     }
-
 }
