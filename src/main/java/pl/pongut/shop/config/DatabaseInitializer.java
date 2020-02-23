@@ -35,7 +35,6 @@ public class DatabaseInitializer implements CommandLineRunner {
     }
 
     private void addUsers() {
-//        String encodedPassword = passwordEncoder.encode("kotu123");
         String encodedPassword = "$2a$10$BQ.QGDi9oiZ/eRB5RZlUPurXRYMV96U5ZmGceOnpJ4nrCDbV8Yu1y"; // kotu123
         userRepo.saveAll(List.of(
                 new User(1, "user", encodedPassword)

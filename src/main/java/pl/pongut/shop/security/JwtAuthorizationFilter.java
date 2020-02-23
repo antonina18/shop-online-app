@@ -30,15 +30,16 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                                     HttpServletResponse response,
                                     FilterChain chain) throws IOException, ServletException {
 
-        String header = request.getHeader(jwtConfig.getTokenHeader());
-        if (header == null || !header.startsWith(jwtConfig.getTokenPrefix())) {
-            chain.doFilter(request, response);
-            return;
+        if (isRequestWithToken(request)) {
+            UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(request, response);
+    }
+
+    private boolean isRequestWithToken(HttpServletRequest request) {
+        String tokenHeader = request.getHeader(jwtConfig.getTokenHeader());
+        return tokenHeader != null && tokenHeader.startsWith(jwtConfig.getTokenPrefix());
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {

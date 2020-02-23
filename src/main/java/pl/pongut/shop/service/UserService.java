@@ -11,11 +11,11 @@ import java.util.ArrayList;
 @Service
 public class UserService implements UserDetailsService {
 
+    private UserRepository userRepository;
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -24,6 +24,6 @@ public class UserService implements UserDetailsService {
                         u.getUsername(),
                         u.getPassword(),
                         new ArrayList<>()))
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("Username " + username + " not found."));
     }
 }
